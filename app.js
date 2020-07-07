@@ -3,20 +3,22 @@
 // Code for Chart is Wrapped Inside a Function That Automatically Resizes the Chart
 function makeResponsive() {
 
-  // If SVG Area is not Empty When Browser Loads, Remove & Replace with a Resized Version of Chart
-  var svgArea = d3.select("body").select("svg");
-
-  // Clear SVG is Not Empty
-  if (!svgArea.empty()) {
-    svgArea.remove();
-  }
-  
-  // Setup the Chart Parameters and Dimensions
-  var svgWidth = 900;
-  var svgHeight = 620;
-
-  // Set the  SVG Margins
-  var margin = {
+    // If SVG Area is not Empty When Browser Loads, Remove & Replace with a Resized Version of Chart
+    let svgArea = d3.select("body").select("svg");
+    
+    // Clear SVG is Not Empty
+    if (!svgArea.empty()) {
+      svgArea.remove();
+    }
+    
+    // Setup the Chart Parameters and Dimensions
+    
+       let svgHeight = window.outerHeight;
+       let svgWidth = window.outerWidth;
+       
+    
+     // Set SVG Margins
+  let margin = {
     top: 20,
     right: 40,
     bottom: 90,
@@ -24,23 +26,23 @@ function makeResponsive() {
   };
 
   // Define Dimensions of the Chart Area
-  var width = svgWidth - margin.left - margin.right;
-  var height = svgHeight - margin.top - margin.bottom;
+  let width = svgWidth - margin.left - margin.right;
+  let height = svgHeight - margin.top - margin.bottom;
 
   // Create an SVG Element/Wrapper - Select Body, Append SVG Area & Set the Dimensions
-  var svg = d3
+  let svg = d3
     .select("#scatter")
     .append("svg")
     .attr("width", svgWidth)
     .attr("height", svgHeight);
-    
+   
   // Append Group Element & Set Margins - Shift (Translate) by Left and Top Margins Using Transform
-  var chartGroup = svg.append("g")
+  let chartGroup = svg.append("g")
     .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
   // Initial Params
-  var chosenXAxis = "poverty";
-  var chosenYAxis = "healthcare";
+  let chosenXAxis = "poverty";
+  let chosenYAxis = "healthcare";
 
   // Function for Updating xScale Upon Click on Axis Label
   function xScale(acsData, chosenXAxis) {
@@ -388,6 +390,8 @@ function makeResponsive() {
 }
 // When Browser Loads, makeResponsive() is Called
 makeResponsive();
+
+
 
 // When Browser Window is Resized, makeResponsive() is Called
 d3.select(window).on("resize", makeResponsive);
